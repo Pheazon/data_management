@@ -1,0 +1,26 @@
+<%
+    if ((session.getAttribute("user") == null)) {
+%>
+You are not logged in<br/>
+<a href="login.jsp">Please Login</a>
+<%} else {
+%>
+Welcome <%=session.getAttribute("user")%>  //this will display the username that is stored in the session.
+<br>
+<br><%
+if ((Integer)session.getAttribute("access") == 2)
+{
+	out.println("To create customer rep account click ");%>
+	<br>
+	<a href = 'customerRepRegister.jsp'>Customer Rep</a>
+	<%
+}
+else if ((Integer)session.getAttribute("access")== 1)
+{
+	out.println("You're a customer rep");
+}
+%>
+<a href='logout.jsp'>Log out</a>
+<%
+    }
+%>

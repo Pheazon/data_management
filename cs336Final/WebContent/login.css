@@ -1,0 +1,13 @@
+body{
+	background-color: black;
+	color: white;
+	allign: center;
+	
+}input[type=text]: focus {
+  	width: 60%;
+  	padding: 12px 20px;
+  	margin: 8px 0;
+  	box-sizing: border-box;
+  	border: none;
+  	color: white;
+}
