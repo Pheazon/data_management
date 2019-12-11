@@ -1,0 +1,105 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<!--Import some libraries that have classes that we need -->
+<%@ page import="java.io.*,java.util.*,java.sql.*,java.text.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Sales</title>
+</head>
+<body>
+	<form method="post" action="saleReport.jsp">			
+		
+		<table>
+			<tr>
+				<td>Month (format MM)</td>
+				<td><input type="date" name="month" maxlength="2" required></td>
+			</tr>
+			<tr>
+				<td>Year (format YYYY)</td>
+				<td><input type="date" name="year" maxlength="4"
+					required></td>
+			</tr>
+		</table>
+		
+		
+		
+		<br> <input type="submit" value="Search">
+	</form>
+	<br><br>
+	
+	
+	<b>Find Flight Reservation by: </b>
+	<form method="post" action="reservationCustomer.jsp">
+		Customer's Name (First Last)<input type="text" name=userid>
+	<input type="submit" value="Search">
+	</form>
+	
+	<form method="post" action="reservationFlightNumber.jsp">
+		Flight Number (Ex. 2221) <input type="text" name=FlightNumber>
+	<input type="submit" value="Search">
+	</form>
+	<h3>Sales and Revenue</h3>
+
+<div>
+	<b>Get revenue summary of: </b>
+	<form method="post" action="revenueFlight.jsp">
+		A flight (Ex. 'UA2221') <input type="text" name=flight>
+	<input type="submit" value="Calculate">
+	</form>
+	
+<!-- 	<form method="post" action="../ManagerFunctionality/RevenueByCity.jsp">
+		A destination city (Ex. 'Newark', 'Atlanta', 'Tokyo') <input type="text" name=city>
+	<input type="submit" value="Calculate">
+	</form> -->
+	
+	<form method="post" action="revenueCustomer.jsp">
+		A customer (by username12) <input type="text" name=userid>
+	<input type="submit" value="Calculate">
+	</form>
+</div>
+
+
+	
+
+
+
+
+
+<br><br>
+<a href='../ManagerFunctionality/SearchMonthAndYear.jsp'>Obtain sales report for month.</a>
+ (See how many tickets were sold for the month.)
+
+<!-- Most revenue generating customers -->
+<br><br>
+<a href="revenueMostByCustomer.jsp">Who are the star customers?!</a>
+(Customers that generated the most revenue)
+<br><br>
+
+
+
+<!-- Most active flights (most reservations) -->
+<a href="../ManagerFunctionality/MostActiveFlight.jsp">What is the most active flight?</a>
+(Flight with the most reservations)
+<table>
+
+
+	<tr>
+<!-- 	<td><a href="saleReport.jsp">Monthly Earnings</a></td> -->
+	
+	<td><a href="reservationNumber.jsp">list by reservation by Flight</a></td>
+	
+	<td><a href="reservationCustomer.jsp">list by reservation by Customer</a></td>
+	
+	<td><a href="RevenueFlight.jsp">Revenue by Flight</a></td>
+	
+	<td><a href="RevenueCustomer.jsp">Revenue by Customer</a></td>
+	
+	
+	<td><a href="success.jsp">Go Back Home</a></td>
+
+	</tr>
+</table>
+</body>
+</html>

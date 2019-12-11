@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%
+	//String url = "jdbc:mysql://cs336db.cdnjviplnzua.us-east-2.rds.amazonaws.com:3306/BarBeerDrinkerSample";
+	ApplicationDB db = new ApplicationDB();	
+	Connection con = db.getConnection();
+	PreparedStatement ps = null;
+	
+	try {
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		%>
+		<form method = "post" action = "plipplop.jsp">
+			<table border ="3" width "20%" cellpadding = "3" style = "color:black">
+			<tr>
+			<td>Flight Number</td>
+			<td>
+			<select name = "flightNum" size = 1>
+			<%
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("SELECT FlightNumber FROM FlightNumber");
+			
+			%>
+				<option value = 
+			</select>
+		
+		</form>
+		<%
+	} catch(Exception e) {
+        out.print("<p>Error connecting to MYSQL server.</p>");
+        e.printStackTrace();
+    } finally {
+        try { ps.close(); } catch (Exception e) {}
+        try { con.close(); } catch (Exception e) {}
+    }
+%>

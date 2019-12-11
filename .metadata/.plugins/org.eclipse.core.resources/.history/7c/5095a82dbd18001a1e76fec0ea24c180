@@ -1,0 +1,87 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Manager Home</title>
+</head>
+<body>
+
+
+<h1 align="center">Ticket Reservation System</h1>
+<h2 align="center">Manager Home Page</h2>
+
+<div align="right"> <b> Logged in as 
+<%=session.getAttribute("username")%> (<%=session.getAttribute("userType") %>).
+</b> <br>
+<a href='../LogOut.jsp'>Log out</a>
+</div>
+
+<h3>Flight Information</h3>
+<div align='right'><a href="../HomePages/ManagerHome.jsp">Back to Manager Home</a></div> <br>
+
+<h4>Star Customers </h4>
+
+<%
+
+try{
+		String url = "jdbc:mysql://mydbinstance.cvlvoepmucx7.us-east-2.rds.amazonaws.com:3306/trs";
+		Connection connection = null;
+		Class.forName("com.mysql.jdbc.Driver");
+		connection = DriverManager.getConnection(url, "rshn", "youknownothingJonSnow");
+		
+		Statement statement = connection.createStatement();
+		
+		String command = "select firstName, lastName, username, email, sum(bookingFee) revenue "+
+				"from ( " +
+						"select distinct resNo, firstName, lastName, username, bookingFee, email "+
+						"from Reservations "+
+					"		join Purchases using (resNo) join Users using (username) "+
+					") C " +
+					"group by username "+
+				 "   having revenue =  "+
+				"(select max(revenue) "+
+				"from (select resNo, username, sum(bookingFee) revenue  "+
+					"from(select distinct resNo, username, bookingFee "+
+							"from Reservations "+
+								"join Purchases using (resNo)) C "+
+					"group by username) B)";
+		ResultSet result = statement.executeQuery(command); 
+
+		
+		
+		//parse out the results
+		while (result.next()) {
+			
+			String firstName = result.getString("firstName");
+			String lastName = result.getString("lastName");
+			String username = result.getString("username");
+			String email = result.getString("email");
+			String revenue = result.getString("revenue");
+
+			
+			out.println("A star customer is:<br>"+ firstName + " " + lastName + " ("+username+", " + email + ") with $"+ revenue +" of revenue.<br><br>");
+
+		}
+		
+		result.close();
+		statement.close();
+		connection.close();
+		
+} catch (Exception e){
+	
+}
+
+%>
+
+<br><br><br>
+<a href="../HomePages/ManagerHome.jsp">Back to Manager Home</a>
+
+
+</body>
+</html>
+
+w

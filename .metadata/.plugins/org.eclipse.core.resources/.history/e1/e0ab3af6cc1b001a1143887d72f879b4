@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%
+	//String url = "jdbc:mysql://cs336db.cdnjviplnzua.us-east-2.rds.amazonaws.com:3306/BarBeerDrinkerSample";
+	ApplicationDB db = new ApplicationDB();	
+	Connection con = db.getConnection();
+	//Connection conn = null;
+	PreparedStatement ps = null;
+	
+	try {
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Connection conn = db.getConnection();
+		
+		String userid = request.getParameter("userid");
+		String flightNum = request.getParameter("flightNum");
+		String type = request.getParameter("Type");
+		String Class = request.getParameter("Class");
+		String SpecialMeal = request.getParameter("SpecialMeal");
+		
+		Statement statement = conn.createStatement();
+		ResultSet pp = statement.executeQuery("SELECT DepartureTime FROM Flight WHERE FlightNumber = '" + flightNum + "'");
+		String date = "";
+		if(pp.next())
+		{
+			date = pp.getString(1);
+		}
+		int bookingFee = -1;
+		
+		if(Class.equals("economy"))
+			bookingFee = 50;
+		else if (Class.equals("business"))
+			bookingFee = 60;
+		else
+			bookingFee = 69;
+		
+		String insert = "INSERT INTO Reservation (FlightNumber, DateBooked, BookingFee, TotalFare, type, SpecialMeal, class, userid)"
+				+ "VALUES(?,?,?,?,?,?,?,?)";
+		PreparedStatement ppp = conn.prepareStatement(insert);
+		ppp.setInt(1, Integer.parseint(flightNum));
+		ppp.setString(2, date);
+		ppp.setInt(3, bookingFee);
+		ppp.setInt(4, 1500);//have to change it, higher fee for international and take booking fee in consideration
+		ppp.setString(5, type);
+		ppp.setString(6, SpecialMeal);
+		ppp.setString(7, Class);
+		ppp.setString(8, userid);
+		
+	}
+	catch (Exception e)
+	{
+		out.println("Lulz");
+	}
+%>

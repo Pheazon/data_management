@@ -3,214 +3,105 @@ CREATE DATABASE  IF NOT EXISTS `BarBeerDrinkerSample` /*!40100 DEFAULT CHARACTER
 USE `BarBeerDrinkerSample`;
 
 
-
 CREATE TABLE `accounts` (
-  `userid` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `access` int NOT NULL,
-  PRIMARY KEY (`userid`)
+`userid` varchar(255) NOT NULL,
+`password` varchar(255) NOT NULL,
+`access` int NOT NULL,
+PRIMARY KEY (`userid`)
+
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 INSERT INTO `accounts`(`userid`, `password`, `access`) VALUES ('admin', 'mydb', '2');
+INSERT INTO `accounts`(`userid`, `password`, `access`) VALUES ('a', 'a', '0');
+INSERT INTO `accounts`(`userid`, `password`, `access`) VALUES ('b', 'b', '1');
+INSERT INTO `accounts`(`userid`, `password`, `access`) VALUES ('c', 'c', '0');
+
+CREATE TABLE Airline (
+Id varchar(2) NOT NULL,
+PRIMARY KEY (Id)
+);
+INSERT INTO Airline(Id) VALUES ("AA");
+INSERT INTO Airline(Id) VALUES ("BB");
+INSERT INTO Airline(Id) VALUES ("CC");
+INSERT INTO Airline(Id) VALUES ("DD");
+INSERT INTO Airline(Id) VALUES ("EE");
+INSERT INTO Airline(Id) VALUES ("FF");
+INSERT INTO Airline(Id) VALUES ("GG");
+INSERT INTO Airline(Id) VALUES ("HH");
+
+CREATE TABLE Airport (
+Id varchar(3) NOT NULL,
+PRIMARY KEY (Id)
+);
+INSERT INTO Airport(Id) VALUES ("AAA");
+INSERT INTO Airport(Id) VALUES ("BBB");
+INSERT INTO Airport(Id) VALUES ("CCC");
+INSERT INTO Airport(Id) VALUES ("DDD");
+INSERT INTO Airport(Id) VALUES ("EEE");
+INSERT INTO Airport(Id) VALUES ("FFF");
+INSERT INTO Airport(Id) VALUES ("GGG");
+INSERT INTO Airport(Id) VALUES ("HHH");
+
+CREATE TABLE Aircraft (
+Id varchar(2) NOT NULL,
+PRIMARY KEY (Id)
+);
+
+CREATE TABLE Flight (
+FlightNumber int,
+ArrivalTime DATETIME,
+DepartureTime DATETIME NOT NULL,
+dom_int varchar(30),
+Fare int,
+departingFrom varchar(2),
+arrivingTo varchar(2),
+PRIMARY KEY (FlightNumber),
+FOREIGN KEY (departingFrom) REFERENCES `Airline`(Id),
+FOREIGN KEY (arrivingTo) REFERENCES `Airline` (Id)
+);
+INSERT INTO Flight(FlightNumber, ArrivalTime, DepartureTime, dom_int, Fare, departingFrom,   arrivingTo) VALUES ("111",'2019-04-27 09:00:00', '2016-04-26 10:00:00', "dom", "25", "AA","BB");
+INSERT INTO Flight(FlightNumber, ArrivalTime, DepartureTime, dom_int, Fare, departingFrom,   arrivingTo ) VALUES ("222",'2019-04-20 09:00:00', '2016-04-18 14:00:00', "int", "22", "BB","CC");
+INSERT INTO Flight(FlightNumber, ArrivalTime, DepartureTime, dom_int, Fare,   departingFrom,   arrivingTo) VALUES ("333",'2019-03-27 09:00:00', '2016-03-25 21:00:00', "dom", "100", "CC","DD");
+INSERT INTO Flight(FlightNumber, ArrivalTime, DepartureTime, dom_int, Fare, departingFrom,   arrivingTo) VALUES ("444",'2019-02-27 09:00:00', '2016-04-26 10:00:00', "int", "250", "DD", "EE");
+INSERT INTO Flight(FlightNumber, ArrivalTime, DepartureTime, dom_int, Fare, departingFrom,   arrivingTo) VALUES ("555",'2019-01-27 09:00:00', '2016-04-26 10:00:00', "int", "75", "EE", "FF");
+INSERT INTO Flight(FlightNumber, ArrivalTime, DepartureTime, dom_int, Fare, departingFrom,   arrivingTo) VALUES ("666",'2019-01-27 09:00:00', '2016-04-26 10:00:00', "dom", "60", "FF", "AA");
+
+CREATE TABLE Reservation (
+ReservationNumber int auto_increment,
+FlightNumber int,
+DateBooked DATETIME NOT NULL,
+BookingFee int,
+TotalFare int,
+type varchar(50),
+SpecialMeal varchar(30),
+class varchar(50),
+userid varchar(255),
+
+PRIMARY KEY (ReservationNumber),
+FOREIGN KEY (FlightNumber) REFERENCES Flight(FlightNumber),
+FOREIGN KEY (userid) REFERENCES accounts(userid)
+); 
+INSERT INTO Reservation(FlightNumber, DateBooked, BookingFee, TotalFare, type, SpecialMeal, class, userid) VALUES ("111", '2016-04-26 10:00:00', "50", "1000","one-way","chawal", "economy", "a");
+INSERT INTO Reservation(FlightNumber, DateBooked, BookingFee, TotalFare, type, SpecialMeal, class, userid) VALUES ("222", '2016-04-18 14:00:00', "60", "1500","round-trip","chawal", "business", "a");
+INSERT INTO Reservation(FlightNumber, DateBooked, BookingFee, TotalFare, type, SpecialMeal, class, userid) VALUES ("333", '2016-03-25 21:00:00', "69", "1559","round-tricp","roti", "first", "c");
+
+/*
+CREATE TABLE Ticket (
+Id int,
+FlightNumber int,
+ReservationNumber int,
+SpecialMeal varchar(30),
+class varchar(50),
+userid varchar(50),
+PRIMARY KEY (Id),
+FOREIGN KEY (FlightNumber) REFERENCES Flight(FlightNumber),
+FOREIGN KEY (ReservationNumber) REFERENCES Reservation(ReservationNumber),
+FOREIGN KEY (userid) REFERENCES accounts(userid)
+);
+INSERT INTO Ticket(Id, FlightNumber, ReservationNumber, SpecialMeal, class) VALUES ('1212',"111","1111", "chawal", "business", "a");
+INSERT INTO Ticket(Id, FlightNumber, ReservationNumber, SpecialMeal, class) VALUES ("1313","111","2222", "roti", "economy", "a");
+INSERT INTO Ticket(Id, FlightNumber, ReservationNumber, SpecialMeal, class) VALUES ("1414","111","3333", "rotiKhao", "economyGaREEB", "a");
 
 
-
-DROP TABLE IF EXISTS `Airport`;
-CREATE TABLE `Airport` (
-  `airport_id` VARCHAR(10),
-  PRIMARY KEY (`airport_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `Airline`;
-CREATE TABLE `Airline` (
- `airline_id` VARCHAR(10),
- `airport_id` VARCHAR(10),
-  PRIMARY KEY(`airline_id`),
-  FOREIGN KEY(`airport_id`) REFERENCES Airport(`airport_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-CREATE TABLE `IsAssociated` (
-  `airport_id` VARCHAR(10),
-  `airline_id` VARCHAR(10),
-  PRIMARY KEY(`airport_id`, `airline_id`),
-  FOREIGN KEY(`airport_id`) REFERENCES Airport(`airport_id`),
-  FOREIGN KEY(`airline_id`) REFERENCES Airline(`airline_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-DROP TABLE IF EXISTS `Aircraft`;
-CREATE TABLE `Aircraft` (
- `aircraft_id` VARCHAR(10),
- PRIMARY KEY(`aircraft_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-DROP TABLE IF EXISTS `owns`;
-CREATE TABLE `likes` (
-  `aircraft_id` VARCHAR(10),
-  `airline_id` VARCHAR(10),
-  PRIMARY KEY(`aircraft_id`),
-  FOREIGN KEY(`aircraft_id`) REFERENCES Aircraft(`aircraft_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-
-DROP TABLE IF EXISTS `OperatedBy`;
-CREATE TABLE `OperatedBy` (
-  `airline_id` VARCHAR(10),
-  `flight_num` int,
-  PRIMARY KEY(`flight_num`),
-  FOREIGN KEY(`airline_id`) REFERENCES Airline(`airline_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-DROP TABLE IF EXISTS `Departure`;
-CREATE TABLE `Departure` (
-  `airport_id` VARCHAR(10),
-  `flight_num` int,
-  `depart_time` time,
-  PRIMARY KEY(`flight_num`),
-  FOREIGN KEY(`airport_id`) REFERENCES Airport(`airport_id`),
-  FOREIGN KEY(`flight_num`) REFERENCES Flight(`flight_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-DROP TABLE IF EXISTS `Arrival`;
-CREATE TABLE `Arrival` (
-  `airport_id` VARCHAR(10),
-  `flight_num` int,
-  `arrive_time` time,
-  PRIMARY KEY(`flight_num`),
-  FOREIGN KEY(`airport_id`) REFERENCES Airport(`airline_id`),
-  FOREIGN KEY(`flight_num`) REFERENCES Flight(`flight_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-DROP TABLE IF EXISTS `Ticket`;
-CREATE TABLE `Ticket` (
-  `ticket_num` int,
-  `flight_num` int,
-  `seat_num` VARCHAR(10),
-  `isClass` boolean,
-  `fare` float,
-  `special_meal` VARCHAR(30),
-  PRIMARY KEY(`ticket_num`),
-  FOREIGN KEY(`flight_num`) REFERENCES Flight
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*INSERT INTO `Tickets`(`ticket_num`, `seat_num`, `isClass`, `fare`, `special_meal`) VALUES ('01', '555555555', '20', True, '22.50');*/
-
-
-
-DROP TABLE IF EXISTS `Flight`;
-CREATE TABLE `Flight` (
-  `flight_num` int,
-  `dom` int,
-  `operational_day` int,
-  PRIMARY KEY(`flight_num`, `airport_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-DROP TABLE IF EXISTS `UsesAircraft`;
-CREATE TABLE `UsesAircraft` (
-  `flight_num` int,
-  `aircraft_id` VARCHAR(10),
-  `dom` int,
-  `operational_day` int,
-  PRIMARY KEY(`flight_num`),
-  FOREIGN KEY(`flight_num`) REFERENCES Flight(`flight_num`),
-  FOREIGN KEY(`aircraft_id`) REFERENCES Aircraft(`aircraft`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-
-
-DROP TABLE IF EXISTS `Flight_Operational`;
-CREATE TABLE `Flight_Operational` (
-  `flight_num` int,
-  `operational_day` date,
-  PRIMARY KEY(`flight_num`),
-  FOREIGN KEY(`flight_num`) REFERENCES Flight(`flight_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-
-
-DROP TABLE IF EXISTS `Economy`;
-CREATE TABLE `Economy` (
-  `cancellation_fee` float,
-  `ticket_num` int,
-  PRIMARY KEY(`ticket_num`),
-  FOREIGN KEY(`ticket_num`) REFERENCES Ticket(`ticket_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-
-
-DROP TABLE IF EXISTS `Customer`;
-CREATE TABLE `Customer` (
-  `customer_id` VARCHAR(10),
-  `name` VARCHAR(50),
-  PRIMARY KEY(`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-DROP TABLE IF EXISTS `Waitlist`;
-CREATE TABLE `Waitlist` (
-  `customer_id` VARCHAR(10),
-  `flight_num` int,
-  PRIMARY KEY(`customer_id`, `flight_num`),
-  FOREIGN KEY(`customer_id`) REFERENCES Customer(`customer_id`),
-  FOREIGN KEY(`flight_num`) REFERENCES Flight(`flight_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-DROP TABLE IF EXISTS `Buys`;
-CREATE TABLE `Buys` (
-  `customer_id` VARCHAR(10),
-  `ticket num` int,
-  `purchase_date` date,
-  PRIMARY KEY(`ticket_num`),
-  FOREIGN KEY(`customer_id`) REFERENCES Customer(`customer_id`),
-  FOREIGN KEY(`ticket_num`) REFERENCES Ticket(`ticket_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-DROP TABLE IF EXISTS `Reserves`;
-CREATE TABLE `Reserves` (
-  `customer_id` VARCHAR(10),
-  `ticket_num` int,
-  PRIMARY KEY(`ticket_num`),
-  FOREIGN KEY(`customer_id`) REFERENCES Customer(`customer_id`),
-  FOREIGN KEY(`ticket_num`) REFERENCES Ticket(`ticket_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-DROP TABLE IF EXISTS `Employee`;
-CREATE TABLE `Employee` (
-  `ssn` VARCHAR(10),
-  `f_name` VARCHAR(30),
-  `i_name` VARCHAR(30),
-  `title` VARCHAR(30),
-  `salary` float,
-  PRIMARY KEY(`ssn`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-DROP TABLE IF EXISTS `Works_For`;
-CREATE TABLE `Works_For` (
-  `airline_id` VARCHAR(10),
-  `ssn` VARCHAR(10),
-  `since` date,
-  PRIMARY KEY(`ssn`),
-  FOREIGN KEY(`ssn`) REFERENCES Employee(`ssn`),
-  FOREIGN KEY(`airline_id`) REFERENCES Airline(`airline_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*SELECT * FROM Ticket WHERE FlightNumber = "222";*/
+SELECT userid, sum(BookingFee) bf FROM Reservation group by userid;

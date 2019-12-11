@@ -5,7 +5,7 @@ You are not logged in<br/>
 <a href="login.jsp">Please Login</a>
 <%} else {
 %>
-Welcome <%=session.getAttribute("user")%>  //this will display the username that is stored in the session.
+Welcome <%=session.getAttribute("user")%> 
 <br>
 <br><%
 if ((Integer)session.getAttribute("access") == 2)
@@ -30,7 +30,10 @@ else if ((Integer)session.getAttribute("access")== 1)
 	out.println("You're a customer rep");%>
 	<br>
 	
-	<a href = 'customerRepRegister.jsp'>List a flight(fix link)</a>
+	<a href = 'customerFlightChanges.jsp'>List a flight(fix everything link)</a>
+	<br>
+	<br>
+	<a href = 'customerRepRegister.jsp'>Make flight reservation for customer</a>
 	<% 
 }
 %>

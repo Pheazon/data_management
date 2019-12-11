@@ -24,13 +24,15 @@ try{
 
 	String month = request.getParameter("month");
 	String year = request.getParameter("year");
-	int revenue = 0;
+	int revenue1 = 0;
+	int revenue2 = 0;
 	
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
 	Connection conn = db.getConnection();
 	
 	Statement statement = con.createStatement();
-//	ResultSet result = statement.executeQuery(command);
+	String command = "SELECT * FROM Reservation WHERE MONTH(DateBooked) = '"+month+"'	AND YEAR(DateBooked) = "+year+"";
+	ResultSet result = statement.executeQuery(command);
 
 	
 	//Make an HTML table to show the results in:
@@ -40,45 +42,23 @@ try{
 	out.print("<tr>");
 
 	out.print("<td>");
-	out.print("Reservation Number");
+	out.print("Reservation Date");
 	out.print("</td>");
 	
 	//make a column
 	out.print("<td>");
-	out.print("Date Reserved");
-	out.print("</td>");
-	
-	//make a column
-	out.print("<td>");
-	out.print("# of Passengers");
+	out.print("Fare");
 	out.print("</td>");
 	
 	//make a column
 	out.print("<td>");
 	out.print("Booking Fee");
 	out.print("</td>");
-	
-	//make a column
-	out.print("<td>");
-	out.print("Fare paid by Passenger");
-	out.print("</td>");
 
-	//make a column
-	out.print("<td>");
-	out.print("Ticket Type");
-	out.print("</td>");
 
-	//make a column
-	out.print("<td>");
-	out.print("Customer Rep.");
-	out.print("</td>");
 
-	//make a column
-	out.print("<td>");
-	out.print("Customer");
-	out.print("</td>");
-			
-	out.print("</tr>");
+
+
 		
 		
 	//parse out the results
@@ -87,36 +67,28 @@ try{
 		out.print("<tr>");
 		//make a column
 		out.print("<td align=center>");
-		out.print(result.getString("resNo"));
+		out.print(result.getString("DateBooked"));
 		out.print("</td>");
+
 		out.print("<td align=center>");
-		out.print(result.getString("dateReserved"));
+		out.print(result.getString("TotalFare"));
 		out.print("</td>");
-		out.print("<td align=center>");
-		out.print(result.getString("passengers"));
-		out.print("</td>");
-		out.print("<td align=center>");
-		out.print(result.getString("totalFare"));
-		out.print("</td>");
-		out.print("<td align=center>");
-		out.print(result.getString("bookingFee"));
-		out.print("</td>");
-		out.print("<td>");
-		out.print(result.getString("type"));
-		out.print("</td>");
-		out.print("<td>");
-		out.print(result.getString("username"));
-		out.print("</td>");
-		out.print("<td>");
-		out.print(result.getString("cust_username"));
-		out.print("</td>");
-		out.print("</tr>");
 		
-		revenue = revenue + result.getInt("bookingFee");
+		out.print("<td align=center>");
+		out.print(result.getString("BookingFee"));
+		out.print("</td>");
+		out.print("<td>");
+
+
+
+		
+		revenue1 = revenue1 + result.getInt("BookingFee");
+		revenue2 = revenue2 + result.getInt("TotalFare");
 	}
 	out.print("</table>");
 	
-	out.println("<br>Revenue generated this month is $"+revenue);
+	out.println("<br>Revenue generated in Booking fees this month is $"+revenue1);
+	out.println("<br>Revenue generated in Fares this month is $"+revenue2);
 	
 	result.close();
 	statement.close();
