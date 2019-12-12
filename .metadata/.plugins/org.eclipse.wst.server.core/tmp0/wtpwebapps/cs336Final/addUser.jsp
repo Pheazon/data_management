@@ -25,16 +25,29 @@
 	Connection conn = db.getConnection();
 	String username = request.getParameter("username");
 	String password = request.getParameter("password");
-	String access = request.getParameter("access");
+	String acc = request.getParameter("access");
+	int access = Integer.parseInt(acc);
 	
 	Statement statement = con.createStatement();
 	//ResultSet rs = statement.executeQuery("select userid from accounts where userid like '" + username + "'");
-
-	String command = "INSERT INTO accounts WHERE userid = '"+username+"', password = '"+password+"', access = '"+access+ "'";
-	statement.executeUpdate(command);
-	out.print("User information has been changed");
-
-	statement.close();
+	String insert = "INSERT INTO accounts (userid, password, access)"
+					+ "VALUES(?, ?, ?)";
+	ps = con.prepareStatement(insert);
+			
+	ps.setString(1, username);
+	ps.setString(2, password);
+	ps.setInt(3, access);
+			
+	int result = 0;
+	result = ps.executeUpdate();
+	if (result < 1) {
+		out.println("Error: Registration failed.");
+	} 
+	else {
+		response.sendRedirect("success.jsp");
+	}
+	
+	ps.close();
 	con.close();
 %>
 <br><a href="success.jsp">Back to Manager Home</a>

@@ -23,20 +23,25 @@
 	PreparedStatement ps = null;
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
 	Connection conn = db.getConnection();
-	String username = request.getParameter("username");
-	String password = request.getParameter("password");
+	String oldUserID = request.getParameter("oldUser");
+	String username = request.getParameter("newUser");
 	
 	Statement statement = con.createStatement();
-	ResultSet rs = statement.executeQuery("select password from accounts where password = '" + password + "'");
+	ResultSet rs = statement.executeQuery("select * from accounts where userid = '" + oldUserID + "'");
 	if (rs.next())
 	{
-		String command = "UPDATE accounts SET userid = '"+username+"', password = '"+password+"'Where password='"+password+"'";
-		statement.executeUpdate(command);
-		out.print("User information has been changed");
+		String command = "UPDATE accounts SET userid = '"+username+"' WHERE userid = '" + oldUserID + "'";
+		Statement st = con.createStatement();
+		if (st.executeUpdate(command) > 0)
+			out.print("User information has been changed");
+		else
+			out.println("User info was not change");
+	
 	}
 	else
 	{
 		out.println("User not found");
+		out.println("olduserID is " + oldUserID + " new userid is " + username);
 	}
 	statement.close();
 	con.close();

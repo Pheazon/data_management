@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>All Orders by Customer</title>
+</head>
+<body>
+
+
+
+<div align="right"><a href='logout.jsp'>Log out</a></div>
+
+
+<h3>Revenue</h3>
+
+<h4>Revenue from customer: <%=request.getParameter("userid")%></h4>
+<%
+
+try{
+		String userid = request.getParameter("userid");
+		int totalRev = 0;
+		
+		ApplicationDB db = new ApplicationDB();
+		Connection con = db.getConnection();
+		PreparedStatement ps = null;
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Connection conn = db.getConnection();
+		
+		Statement statement = con.createStatement();
+		String airline = request.getParameter("airline");
+		
+		String command = "SELECT FlightNumber FROM Flight WHERE airlineID = '" + airline+ "'";
+		
+		ResultSet result = statement.executeQuery(command);
+		//Make an HTML table to show the results in:
+		out.print("<table border='1'>");
+
+		//make a row
+		out.print("<tr>");
+		
+		//make a column
+		out.print("<td>");
+		out.print("AirlineID");
+		out.print("</td>");
+
+
+		//make a column
+		out.print("<td>");
+		out.print("Total Fare");
+		out.print("</td>");
+		
+		out.print("</tr>");
+		
+		int totalFare = 0;
+		//parse out the results
+		while (result.next()) {
+			
+			String anotherCommand = "SELECT TotalFare FROM Reservation WHERE FlightNumber = '" + result.getInt(1) + "'";
+			out.println(anotherCommand);
+			ResultSet anotherresult = statement.executeQuery(anotherCommand);
+			while (anotherresult.next())
+			{
+				totalFare += anotherresult.getInt(1);
+			}
+			anotherresult.close();
+		}
+		
+			out.print("<td>");			
+			out.print(airline);
+			out.print("</td>");
+			out.print("<td>");			
+			out.print(totalFare);
+			out.print("</td>");
+			out.print("</tr>");
+		
+		result.close();
+
+		statement.close();
+		con.close();
+} catch (Exception e){
+	
+}
+
+%>
+<br><br>
+<a href="success.jsp">Back Back Home</a>
+
+
+</body>
+</html>

@@ -29,12 +29,19 @@
 	</form>
 	<br><br>
 	
-	
+	<%
+	ApplicationDB db = new ApplicationDB();	
+	Connection con = db.getConnection();
+	Statement st;
+	ResultSet rs;
+	%>
 	<b>Find Flight Reservation by: </b>
 	<form method="post" action="reservationCustomer.jsp">
 		Customer's Name (First Last)<input type="text" name=userid>
 	<input type="submit" value="Search">
 	</form>
+	
+	
 	
 	<form method="post" action="reservationFlightNumber.jsp">
 		Flight Number (Ex. 2221) <input type="text" name=FlightNumber>
@@ -49,6 +56,31 @@
 	<input type="submit" value="Calculate">
 	</form>
 	
+	
+	<form method = "post" action ="revenueAirline.jsp">
+	<tr>
+	<td>Pick the Airline to find its revenue</td>
+	<td>
+	<select name = "airline" size = 1>
+	<% 
+	
+	st = con.createStatement();
+	rs = st.executeQuery("SELECT Id FROM Airline");
+	
+	while (rs.next())
+	{
+		%>
+		<option value = "<%= rs.getString(1) %>"> <%= rs.getString(1) %></option>
+		<%
+	}
+	st.close();
+	rs.close();
+	%>
+	</select>
+	<input type="submit" value="Submit">
+	</form>
+	
+	
 <!-- 	<form method="post" action="../ManagerFunctionality/RevenueByCity.jsp">
 		A destination city (Ex. 'Newark', 'Atlanta', 'Tokyo') <input type="text" name=city>
 	<input type="submit" value="Calculate">
@@ -58,6 +90,65 @@
 		A customer (by username12) <input type="text" name=userid>
 	<input type="submit" value="Calculate">
 	</form>
+	
+	<form method = "post" action ="listFlights.jsp">
+	<tr>
+	<td>Pick the Airport</td>
+	<td>
+	<select name = "airport" size = 1>
+	<% 
+	
+	st = con.createStatement();
+	rs = st.executeQuery("SELECT Id FROM Airport");
+	
+	while (rs.next())
+	{
+		%>
+		<option value = "<%= rs.getString(1) %>"> <%= rs.getString(1) %></option>
+		<%
+	}
+	st.close();
+	rs.close();
+	%>
+	</select>
+	<input type="submit" value="Submit">
+	</form>
+	
+	
+	<tr>
+	<% 
+	
+	st = con.createStatement();
+	rs = st.executeQuery("SELECT COUNT(FlightNumber),FlightNumber FROM Reservation GROUP BY FlightNumber ORDER BY COUNT(*) DESC");
+	out.print("<table border='1'>");
+
+	//make a row
+	out.print("<tr>");
+
+	out.print("<td>");
+	out.print("Flight Number");
+	out.print("</td>");
+
+	
+	out.println("<td>");
+	out.print("# of tickets bought");
+	while (rs.next())
+	{
+		
+		out.println("<tr>");
+		out.println("<td>");
+		out.println(rs.getString("FlightNumber"));
+		out.println("</td>");
+		out.println("<td>");
+		out.println(rs.getInt(1));
+		out.println("</td>");
+		out.println("</tr>");
+	}
+	out.print("</tr>");
+	st.close();
+	rs.close();
+	%>
+	
 </div>
 
 
@@ -80,8 +171,6 @@
 
 
 <!-- Most active flights (most reservations) -->
-<a href="../ManagerFunctionality/MostActiveFlight.jsp">What is the most active flight?</a>
-(Flight with the most reservations)
 <table>
 
 

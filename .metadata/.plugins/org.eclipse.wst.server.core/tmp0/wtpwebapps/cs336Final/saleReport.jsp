@@ -59,7 +59,7 @@ try{
 
 
 
-		
+	int tot = 0;
 		
 	//parse out the results
 	while (result.next()) {
@@ -84,11 +84,14 @@ try{
 		
 		revenue1 = revenue1 + result.getInt("BookingFee");
 		revenue2 = revenue2 + result.getInt("TotalFare");
+		tot = revenue1 + revenue2;
 	}
 	out.print("</table>");
 	
 	out.println("<br>Revenue generated in Booking fees this month is $"+revenue1);
 	out.println("<br>Revenue generated in Fares this month is $"+revenue2);
+	
+	out.println("<br>Total Revenue Generated is $"+ tot);
 	
 	result.close();
 	statement.close();
@@ -98,7 +101,7 @@ try{
 }
 %>
 <br><br><br>
-<a href="../HomePages/ManagerHome.jsp">Back to Manager Home</a>
+<a href="success.jsp">Back to Home</a>
 
 
 </body>

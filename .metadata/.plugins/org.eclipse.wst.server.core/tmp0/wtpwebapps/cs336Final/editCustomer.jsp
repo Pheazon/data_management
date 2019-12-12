@@ -85,13 +85,13 @@
 		
 		<table>
 			<tr>
-				<td>user to change</td>
-				<td><input type="text" name="username" maxlength="25"
+				<td>username</td>
+				<td><input type="text" name="oldUser" maxlength="25"
 				required></td>
 			</tr>
 			<tr>
-				<td>password</td>
-				<td><input type="password" name="password" maxlength="25"
+				<td>new username</td>
+				<td><input type="text" name="newUser" maxlength="25"
 				required></td>
 			</tr>
 		</table>

@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%
+	//String url = "jdbc:mysql://cs336db.cdnjviplnzua.us-east-2.rds.amazonaws.com:3306/BarBeerDrinkerSample";
+	ApplicationDB db = new ApplicationDB();	
+	Connection con = db.getConnection();
+	//Connection conn = null;
+	PreparedStatement ps = null;
+	
+	try {
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Connection conn = db.getConnection();
+		
+		String userid = request.getParameter("userid");
+		String leavingFrom = request.getParameter("leavingFrom");
+		String goingTo = request.getParameter("goingTo");
+		String type = request.getParameter("Type");
+		String Class = request.getParameter("Class");
+		String SpecialMeal = request.getParameter("SpecialMeal");
+		
+		Statement statement = conn.createStatement();
+		
+		ResultSet rs = statement.executeQuery("SELECT * FROM Flight WHERE departingFrom = '" + leavingFrom + "' AND arrivingTo = '" + goingTo + "'");
+		if (rs.next())
+		{
+			out.println("Booked a flight from " + leavingFrom + " to " + goingTo);
+		}
+		else
+		{
+			rs = statement.executeQuery("SELECT * FROM Flight WHERE departingFrom = '" + leavingFrom + "'");
+			ResultSet rsDest = statement.executeQuery("SELECT * FROM Flight WHERE arrivingTo = '" + goingTo + "'");
+			ArrayList<String> arlist = new ArrayList<String>();
+			arlist.add(leavingFrom);
+			
+			ResultSet temp = statement.executeQuery("SELECT * FROM Flight WHERE departingFrom = '" + rs.getString("arrivingTo") + "'");
+			arlist.add(temp.getString("departingFrom"));
+			
+			while(arlist.get(arlist.size()-1).equals(goingTo) == false)
+			{
+				String storeThis = temp.getString("arrivingTo");
+				temp.close();
+				temp = statement.executeQuery("SELECT * FROM Flight WHERE departingFrom = '" + storeThis + "'");
+				arlist.add(temp.getString("departingFrom"));
+			}
+			out.println("THE LIST WE MADE IS ");
+			for(int i = 0; i < arrlist.size(); i++)
+				out.print(arrlist.get(i) + " ");
+		}
+	}
+	catch (Exception e)
+	{
+		out.println("Lulz");
+	}
+%>
