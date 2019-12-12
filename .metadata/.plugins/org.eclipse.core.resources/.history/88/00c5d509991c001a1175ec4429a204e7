@@ -34,7 +34,7 @@
 		Connection conn = db.getConnection();
 
 		Statement statement = conn.createStatement();
-		String command = "SELECT COUNT(DISTINCT ReservationNumbe) count FROM Reservation WHERE CONCAT(airlineID, flightNumber) = '"
+		String command = "SELECT COUNT(DISTINCT resNo) count FROM Purchases WHERE CONCAT(airlineID, flightNumber) = '"
 				+ Flight + "'";
 		ResultSet result = statement.executeQuery(command);
 		if (result.next()) {

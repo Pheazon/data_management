@@ -17,7 +17,6 @@
 
 <h3>Revenue</h3>
 
-<h4>Revenue from customer: <%=request.getParameter("userid")%></h4>
 <%
 
 try{
@@ -36,7 +35,7 @@ try{
 		String command = "SELECT FlightNumber FROM Flight WHERE airlineID = '" + airline+ "'";
 		
 		ResultSet result = statement.executeQuery(command);
-		//Make an HTML table to show the results in:
+
 		out.print("<table border='1'>");
 
 		//make a row
@@ -89,7 +88,7 @@ try{
 
 %>
 <br><br>
-<a href="success.jsp">Back Back Home</a>
+<a href="success.jsp">Back Home</a>
 
 
 </body>

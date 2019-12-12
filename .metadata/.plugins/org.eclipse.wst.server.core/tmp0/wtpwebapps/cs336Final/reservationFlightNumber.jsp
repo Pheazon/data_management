@@ -13,17 +13,14 @@
 
 
 
-<div align="right"> <b> Logged in as 
-<%=session.getAttribute("username")%> (<%=session.getAttribute("userType") %>).
-</b> <br>
-<a href='logout.jsp'>Log out</a>
-</div>
 
-<h3>Flight Information</h3>
-<div align='right'><a href="success.jsp">Go Back Home</a></div> <br>
+
+<a href='logout.jsp'>Log out</a>
+
+
 
 <h4>List of reservations for
-<%=request.getParameter("flightNumber")%>
+<%=request.getParameter("FlightNumber")%>
 </h4>
 
 <%
@@ -41,7 +38,7 @@
 		
 		Statement statement = conn.createStatement();
 		
-		/* Big ass query.  Joins tables and merges days_occurs into one column */
+
 		String command = "SELECT * FROM Reservation WHERE FlightNumber = '"+FlightNumber+"'";
 		ResultSet result = statement.executeQuery(command);
 

@@ -38,7 +38,7 @@
 		
 		Statement statement = conn.createStatement();
 		
-
+		/* Big ass query.  Joins tables and merges days_occurs into one column */
 		String command = "SELECT * FROM Reservation WHERE FlightNumber = '"+FlightNumber+"'";
 		ResultSet result = statement.executeQuery(command);
 

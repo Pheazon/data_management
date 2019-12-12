@@ -12,17 +12,11 @@
 
 
 
-<h1 align="center">Ticket Reservation System</h1>
-<h2 align="center">Manager Home Page</h2>
 
-<div align="right">
-	<b> Logged in as <%=session.getAttribute("username")%> (<%=session.getAttribute("userType")%>).
-	</b> <br> <a href='../LogOut.jsp'>Log out</a>
-</div>
 
 <h3>Revenue Information</h3>
 <div align='right'>
-	<a href="../HomePages/ManagerHome.jsp">Back to Manager Home</a>
+	<a href="success.jsp">Back Home</a>
 </div>
 <br>
 
@@ -40,7 +34,7 @@
 		Connection conn = db.getConnection();
 
 		Statement statement = conn.createStatement();
-		String command = "SELECT COUNT(DISTINCT resNo) count FROM Purchases WHERE CONCAT(airlineID, flightNumber) = '"
+		String command = "SELECT COUNT(DISTINCT ReservationNumbe) count FROM Reservation WHERE CONCAT(airlineID, flightNumber) = '"
 				+ Flight + "'";
 		ResultSet result = statement.executeQuery(command);
 		if (result.next()) {
@@ -60,7 +54,7 @@
 <br>
 <br>
 <br>
-<a href="../HomePages/ManagerHome.jsp">Back to Manager Home</a>
+<a href="success.jsp">Back to Manager Home</a>
 
 
 </body>
