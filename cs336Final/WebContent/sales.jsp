@@ -37,14 +37,14 @@
 	%>
 	<b>Find Flight Reservation by: </b>
 	<form method="post" action="reservationCustomer.jsp">
-		Customer's Name (First Last)<input type="text" name=userid>
+		user id<input type="text" name=userid>
 	<input type="submit" value="Search">
 	</form>
 	
 	
 	
 	<form method="post" action="reservationFlightNumber.jsp">
-		Flight Number (Ex. 2221) <input type="text" name=FlightNumber>
+		Flight Number (Ex. 111) <input type="text" name=FlightNumber>
 	<input type="submit" value="Search">
 	</form>
 	<h3>Sales and Revenue</h3>
@@ -52,7 +52,7 @@
 <div>
 	<b>Get revenue summary of: </b>
 	<form method="post" action="revenueFlight.jsp">
-		A flight (Ex. 'UA2221') <input type="text" name=FlightNumber>
+		A flight (Ex. '111') <input type="text" name=FlightNumber>
 	<input type="submit" value="Calculate">
 	</form>
 	
@@ -83,7 +83,7 @@
 
 	
 	<form method="post" action="revenueCustomer.jsp">
-		A customer (by username12) <input type="text" name=userid>
+		user id <input type="text" name=userid>
 	<input type="submit" value="Calculate">
 	</form>
 	

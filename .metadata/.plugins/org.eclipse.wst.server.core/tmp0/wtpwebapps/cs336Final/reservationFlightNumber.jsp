@@ -158,7 +158,7 @@
 %>
 
 <br><br><br>
-<a href="success.jsp">Back to Customer Rep Home</a>
+<a href="success.jsp">Back Home</a>
 
 
 </body>

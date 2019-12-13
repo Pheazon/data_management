@@ -14,7 +14,7 @@
 
 
 <h3>Flight Information</h3>
-<div align='right'><a href="success.jsp">Back to CustomerRep Home</a></div> <br>
+<div align='right'><a href="success.jsp">Back Home</a></div> <br>
 
 <h4>List of ticket reservations for
 <%=request.getParameter("userid")%>

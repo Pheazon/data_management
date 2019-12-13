@@ -15,9 +15,7 @@
 
 
 <h3>Revenue Information</h3>
-<div align='right'>
-	<a href="success.jsp">Back Home</a>
-</div>
+
 <br>
 
 <h4>Revenue by flight</h4>

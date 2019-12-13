@@ -98,7 +98,7 @@ try{
 
 %>
 <br><br>
-<a href="success.jsp">Back Back Home</a>
+<a href="success.jsp">Back Home</a>
 
 
 </body>

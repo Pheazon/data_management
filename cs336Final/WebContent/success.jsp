@@ -30,7 +30,7 @@ else if ((Integer)session.getAttribute("access")== 1)
 	out.println("You're a customer rep");%>
 	<br>
 	
-	<a href = 'customerFlightChanges.jsp'>List a flight(fix everything link)</a>
+	<a href = 'customerFlightChanges.jsp'>List a flight</a>
 	<br>
 	<br>
 	<a href = 'customerRepRegister.jsp'>Make flight reservation for customer</a>

@@ -61,7 +61,7 @@ try{
 
 	int tot = 0;
 		
-	//parse out the results
+	
 	while (result.next()) {
 		//make a row
 		out.print("<tr>");
