@@ -10,7 +10,6 @@ Welcome <%=session.getAttribute("user")%>
 <table>
 	<tr>
 		<th><a href="customerFlights.jsp">Flights</a></th>
-		<th><a href="customerAdvancedSearch.jsp">Advanced Search</a></th>
 		<th><a href="customerUpcomingReservations.jsp">Upcoming Reservations</a></th>
 		<th><a href="customerPastReservations.jsp">Past Reservations</a></th>
 	</tr>
@@ -18,7 +17,7 @@ Welcome <%=session.getAttribute("user")%>
 <br>
 
 
-<h1>Past Reservations</h1>
+<h1>Upcoming Reservations</h1>
 <body>
 
 <div align="right"><a href='logout.jsp'>Log out</a></div>
@@ -30,7 +29,7 @@ try{
 	%>
 		<form>
 		Enter Your Username:<br><input type="text" name="user"><br>
-		<input type="submit", value="See my past flights">
+		<input type="submit", value="See my upcoming flights">
 		</form>
 	<%
 		Class.forName("com.mysql.jdbc.Driver").newInstance();	
@@ -46,7 +45,7 @@ try{
 		Connection conn = db.getConnection();
 		
 		Statement statement = con.createStatement();
-		String command = "SELECT r.DateBooked, r.ReservationNumber, r.TotalFare, f.DepartureTime, f.ArrivalTime, r.FlightNumber, r.type, f.departingFrom, f.arrivingTo, f.airlineID, r.class, f.dom_int FROM Flight f, Reservation r WHERE r.userid='" + userid + "' AND r.FlightNumber = f.FlightNumber AND f.ArrivalTime<'" + today + "'";
+		String command = "SELECT r.DateBooked, r.ReservationNumber, r.TotalFare, f.DepartureTime, f.ArrivalTime, r.FlightNumber, r.type, f.departingFrom, f.arrivingTo, f.airlineID, r.class, f.dom_int FROM Flight f, Reservation r WHERE r.userid='" + userid + "' AND r.FlightNumber = f.FlightNumber AND f.DepartureTime>'" + today + "'";
 		
 		ResultSet result = statement.executeQuery(command);
 

@@ -2,7 +2,12 @@
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+
+	<h4>Reservation Details</h4>
 <%
+	out.print("<h3>");
+	out.print(request.getParameter("FlightNum"));
+	out.print("</h3>");
 	//String url = "jdbc:mysql://cs336db.cdnjviplnzua.us-east-2.rds.amazonaws.com:3306/BarBeerDrinkerSample";
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();

@@ -96,3 +96,6 @@
 0:0:0:0:0:0:0:1 - - [12/Dec/2019:22:34:27 -0500] "GET /favicon.ico HTTP/1.1" 404 1047
 0:0:0:0:0:0:0:1 - - [12/Dec/2019:22:56:34 -0500] "GET /cs336Final/customerRepRegister.jsp HTTP/1.1" 200 407
 0:0:0:0:0:0:0:1 - - [12/Dec/2019:22:56:39 -0500] "GET /cs336Final/sales.jsp HTTP/1.1" 200 2718
+0:0:0:0:0:0:0:1 - - [12/Dec/2019:23:11:40 -0500] "GET /cs336Final/ HTTP/1.1" 200 486
+0:0:0:0:0:0:0:1 - - [12/Dec/2019:23:11:45 -0500] "POST /cs336Final/checkLoginDetails.jsp HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [12/Dec/2019:23:11:45 -0500] "GET /cs336Final/success.jsp HTTP/1.1" 200 333

@@ -10,6 +10,7 @@ Welcome <%=session.getAttribute("user")%>
 <table>
 	<tr>
 		<th><a href="customerFlights.jsp">Flights</a></th>
+		<th><a href="customerAdvancedSearch.jsp">Advanced Search</a></th>
 		<th><a href="customerUpcomingReservations.jsp">Upcoming Reservations</a></th>
 		<th><a href="customerPastReservations.jsp">Past Reservations</a></th>
 	</tr>

@@ -6,7 +6,20 @@ You are not logged in<br/>
 <%} else {
 %>
 Welcome <%=session.getAttribute("user")%> 
+<%
+if ((Integer)session.getAttribute("access") == 0){
+%>
 <br>
+<table>
+	<tr>
+		<th><a href="customerFlights.jsp">Flights</a></th>
+		<th><a href="customerAdvancedSearch.jsp">Advanced Search</a></th>
+		<th><a href="customerUpcomingReservations.jsp">Upcoming Reservations</a></th>
+		<th><a href="customerPastReservations.jsp">Past Reservations</a></th>
+	</tr>
+</table>
+<br>
+<% } %>
 <br><%
 if ((Integer)session.getAttribute("access") == 2)
 {
@@ -30,29 +43,13 @@ else if ((Integer)session.getAttribute("access")== 1)
 	out.println("You're a customer rep");%>
 	<br>
 	
-	<a href = 'customerFlightChanges.jsp'>List a flight</a>
+	<a href = 'customerFlightChanges.jsp'>List a flight(fix everything link)</a>
 	<br>
 	<br>
 	<a href = 'customerRepRegister.jsp'>Make flight reservation for customer</a>
 	<% 
 }
-else if ((Integer)session.getAttribute("access")== 0)
-{
-	out.println("You're a customer");%>
-	<br>
-
-	<a href = 'customerReservation.jsp'>Search Flights and Make a Reservation</a>
-	<br>
-	<br>
-	<a href = 'customerUpcomingReservations.jsp'>View Upcoming Reservations</a>
-	<br>
-	<br>
-	<a href = 'customerPastReservations.jsp'>View Past Reservations</a>
-	<% 
-}
 %>
-
-
 <a href='logout.jsp'>Log out</a>
 <%
     }
