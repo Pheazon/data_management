@@ -38,16 +38,13 @@ else if ((Integer)session.getAttribute("access")== 1)
 }
 else if ((Integer)session.getAttribute("access")== 0)
 {
-	out.println("You're a customer");%>
+	out.println("You're a customer rep");%>
 	<br>
-
-	<a href = 'customerReservation.jsp'>Search Flights and Make a Reservation</a>
-	<br>
-	<br>
-	<a href = 'customerUpcomingReservations.jsp'>View Upcoming Reservations</a>
+	
+	<a href = 'customerFlightChanges.jsp'>List a flight</a>
 	<br>
 	<br>
-	<a href = 'customerPastReservations.jsp'>View Past Reservations</a>
+	<a href = 'customerRepRegister.jsp'>Make flight reservation for customer</a>
 	<% 
 }
 %>

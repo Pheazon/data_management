@@ -36,7 +36,23 @@ else if ((Integer)session.getAttribute("access")== 1)
 	<a href = 'customerRepRegister.jsp'>Make flight reservation for customer</a>
 	<% 
 }
+else if ((Integer)session.getAttribute("access")== 0)
+{
+	out.println("You're a customer");%>
+	<br>
+
+	<a href = 'customerReservation.jsp'>Search Flights and Make a Reservation</a>
+	<br>
+	<br>
+	<a href = 'customerUpcomingReservations.jsp'>View Upcoming Reservations</a>
+	<br>
+	<br>
+	<a href = 'customerPastReservations.jsp'>View Past Reservations</a>
+	<% 
+}
 %>
+
+
 <a href='logout.jsp'>Log out</a>
 <%
     }
