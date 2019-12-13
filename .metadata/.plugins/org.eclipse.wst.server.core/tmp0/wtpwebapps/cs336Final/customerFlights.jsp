@@ -29,6 +29,16 @@ Welcome <%=session.getAttribute("user")%>
   <br> <br>
   <input type="radio" name="command" value="RoundTrip"/>Round-Trip
   <br> <br>
+ <label for="start">Travel date:</label>
+	<input type="date" id="start" name="tripStart"
+       value="2019-12-11"
+       min="2016-01-01" max="2020-12-31">
+       
+       <label for="start">Return date:</label>
+
+	<input type="date" id="start" name="tripEnd"
+       value="2019-12-18"
+       min="2016-01-01" max="2020-12-31">
  
    
   <br>   
