@@ -10,10 +10,7 @@
 </head>
 <body>
 
-	
-	<div align="right"> <b> Logged in as 
-	<%=session.getAttribute("username")%>
-	</b> <br>
+
 	<a href='logout.jsp'>Log out</a>
 	</div>
 	
@@ -39,7 +36,7 @@
 	statement.close();
 	con.close();
 %>
-<br><a href="success.jsp">Back to Manager Home</a>
+<br><a href="success.jsp">Back Home</a>
 			
 </body>
 </html>

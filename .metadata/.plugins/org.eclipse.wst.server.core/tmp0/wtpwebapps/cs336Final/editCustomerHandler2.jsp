@@ -11,11 +11,9 @@
 <body>
 
 	
-	<div align="right"> <b> Logged in as 
-	<%=session.getAttribute("username")%>
-	</b> <br>
+
 	<a href='logout.jsp'>Log out</a>
-	</div>
+
 	
 	<% 
 	ApplicationDB db = new ApplicationDB();

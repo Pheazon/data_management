@@ -52,7 +52,7 @@
 <div>
 	<b>Get revenue summary of: </b>
 	<form method="post" action="revenueFlight.jsp">
-		A flight (Ex. 'UA2221') <input type="text" name=flight>
+		A flight (Ex. 'UA2221') <input type="text" name=FlightNumber>
 	<input type="submit" value="Calculate">
 	</form>
 	
@@ -80,11 +80,7 @@
 	<input type="submit" value="Submit">
 	</form>
 	
-	
-<!-- 	<form method="post" action="../ManagerFunctionality/RevenueByCity.jsp">
-		A destination city (Ex. 'Newark', 'Atlanta', 'Tokyo') <input type="text" name=city>
-	<input type="submit" value="Calculate">
-	</form> -->
+
 	
 	<form method="post" action="revenueCustomer.jsp">
 		A customer (by username12) <input type="text" name=userid>

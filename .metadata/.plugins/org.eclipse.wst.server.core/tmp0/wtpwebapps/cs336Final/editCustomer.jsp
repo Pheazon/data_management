@@ -12,9 +12,7 @@
 
 	<h1 align="center">Edit customer</h1>
 	
-	<div align="right"> <b> Logged in as 
-	<%=session.getAttribute("user")%>
-	</b> <br>
+
 	<a href='logout.jsp'>Log out</a>
 	</div>
 	

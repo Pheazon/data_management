@@ -42,7 +42,7 @@
 			return;
 		}
 	} catch(Exception e) {
-        out.print("<p>Error connecting to MYSQL server.</p>");
+        out.print("<p>didn't connect to the server.</p>");
         e.printStackTrace();
     } finally {
         try { ps.close(); } catch (Exception e) {}

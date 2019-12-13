@@ -70,7 +70,7 @@
 	}
 	catch (Exception e)
 	{
-		out.println("Lulz");
+		out.println("problem");
 	}
 			%>
 		</form>

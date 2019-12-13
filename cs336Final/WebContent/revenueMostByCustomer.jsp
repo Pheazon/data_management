@@ -37,7 +37,7 @@ try{
 
 		
 		
-		//parse out the results
+
 		while (result.next()) {
 			
 			String userid = result.getString("userid");

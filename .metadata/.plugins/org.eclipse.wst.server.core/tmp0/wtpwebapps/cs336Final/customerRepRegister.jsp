@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create Customer Rep Account</title>
 </head>
-<body bgcolor=#a6dced>
+<body>
 <% if((Integer)session.getAttribute("access") != 2) {
 	out.println("Error, only admins can access this page");
 	%><a href="logout.jsp">Log out</a> 
@@ -17,8 +17,7 @@
 }
 else
 {
-		out.println("Create Customer Rep account here"); %> <!-- output the same thing, but using 
-                                      jsp programming -->
+		out.println("Create Customer Rep account here"); %> 
 
 
 

@@ -11,20 +11,13 @@
 <body>
 
 
-<h1 align="center">Ticket Reservation System</h1>
-<h2 align="center">Customer Rep Home Page</h2>
-
-<div align="right"> <b> Logged in as 
-<%=session.getAttribute("username")%> (<%=session.getAttribute("userType") %>).
-</b> <br>
-<a href='../LogOut.jsp'>Log out</a>
-</div>
+<a href='logout.jsp'>Log out</a>
 
 
 <h3>Flight Information</h3>
 <div align='right'><a href="../HomePages/CustomerRepHome.jsp">Back to Customer Rep Home</a></div> <br>
 
-<h4>List of flights touching 
+<h4>List of flights
 <%=request.getParameter("airportID")%>
 </h4>
 
@@ -167,7 +160,7 @@
 %>
 
 <br><br><br>
-<a href="../HomePages/CustomerRepHome.jsp">Back to Customer Rep Home</a>
+<a href="success.jsp">Back Home</a>
 
 
 </body>
