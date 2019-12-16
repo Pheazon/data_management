@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item key="J2EE_EXPORT_OVERWRITE" value="false"/>
+	<item key="J2EE_EXPORT_OVERWRITE" value="true"/>
 	<item key="J2EE_EXPORT_SOURCE" value="false"/>
 	<list key="J2EE_IMPORT_null">
 		<item value="/Users/haseeb/cs336Final.war"/>
@@ -9,7 +9,9 @@
 		<item value="NULL_RUNTIME"/>
 	</list>
 	<list key="J2EE_EXPORT_JST_WEB">
-		<item value="/Users/haseeb/Desktop/cs336BACKUP.war"/>
+		<item value="/Users/haseeb/Desktop/adventOfCode/cs336Final.war"/>
+		<item value="/Users/haseeb/Desktop/cs336Final.war"/>
 		<item value="/Users/haseeb/Desktop/Capstone_Demo-master/cs336Final.war"/>
+		<item value="/Users/haseeb/Desktop/cs336BACKUP.war"/>
 	</list>
 </section>

@@ -46,7 +46,10 @@ else if ((Integer)session.getAttribute("access")== 1)
 	<a href = 'customerFlightChanges.jsp'>List a flight(fix everything link)</a>
 	<br>
 	<br>
-	<a href = 'customerRepRegister.jsp'>Make flight reservation for customer</a>
+	<a href = 'repEditAirport.jsp'>Edit airports</a>
+	<br>	
+	<a href = 'repEditAirline.jsp'>Edit airline</a>
+	<br>
 	<% 
 }
 %>

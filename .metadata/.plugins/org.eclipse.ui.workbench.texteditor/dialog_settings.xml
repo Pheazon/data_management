@@ -8,6 +8,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="jsp"/>
 			<item value="customer"/>
 			<item value="back"/>
 			<item value="star"/>
@@ -15,7 +16,6 @@
 			<item value="logged"/>
 			<item value="rev"/>
 			<item value="for"/>
-			<item value="close"/>
 		</list>
 		<list key="replacehistory">
 		</list>
